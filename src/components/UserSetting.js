@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Field,  Formik } from 'formik';
 import zxcvbn from 'zxcvbn';
+import axios from 'axios'
 class UserSetting extends Component {
     state = {
         activateTab: 1,
@@ -38,6 +39,24 @@ class UserSetting extends Component {
         }else{
           this.setState({meeterColor :'green',meeterStatement :'Excellent',fillMetterWidht :'100%'})
         }
+      }
+
+       saveData(){
+        const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+       axios.post(apiUrl,{
+        title: this.state.lastName,
+        body: this.state.firstName,
+        userId: 1,
+      }).then((repos) => {
+          const allRepos = repos.data;
+          if(repos.status === 200 || repos.status === 201){
+            alert("Data is saved in database")
+
+          }else{
+            alert("Something went wrong!")
+          }
+
+        });
       }
       
 
@@ -209,14 +228,13 @@ render() {
         
         }}
         validate={values => {
-          console.log(values)
-
-        }}
-        
+          const errors = {};
+            return errors;
+        }}        
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            console.log(values)
-            alert(JSON.stringify(values, null, 2));
+            this.saveData();  
+
             setSubmitting(false);
           }, 400);
         }}
@@ -245,9 +263,6 @@ render() {
               }}
   
             />
-            <label style={{color:'red'}}>
-                {errors.firstName && touched.firstName && errors.firstName}
-            </label>
             <label style={{marginTop:24}} >Enter Last name</label>
             <input
             style={{
@@ -265,14 +280,11 @@ render() {
               onBlur={handleBlur}
               value={values.lastName}
             />
-            <label style={{color:'red'}}>
-                {errors.lastName && touched.lastName && errors.lastName}
-            </label>
             <label style={{marginTop:24 ,fontSize:24}} >Enter address</label>
             <label style={{marginTop:40 }} >Line1</label>
             <input
             style={{
-              borderColor:errors.lastName ? 'red' :'#616161'
+              borderColor:errors.line1 ? 'red' :'#616161'
             }}
               className="InputStyle"
               type="text"
@@ -284,13 +296,13 @@ render() {
                 }
               }
               onBlur={handleBlur}
-              value={values.lastName}
+              value={values.line1}
             />
 
             <label style={{marginTop:24 }} >Line2</label>
             <input
             style={{
-              borderColor:errors.lastName ? 'red' :'#616161'
+              borderColor:errors.line2 ? 'red' :'#616161'
             }}
               className="InputStyle"
               type="text"
@@ -302,7 +314,7 @@ render() {
                 }
               }
               onBlur={handleBlur}
-              value={values.lastName}
+              value={values.line2}
             />
         <div style={{display:'flex',
         placeContent:'space-between',
@@ -313,7 +325,7 @@ render() {
           <label style={{marginTop:24 }} >House number</label>
             <input
             style={{
-              borderColor:errors.lastName ? 'red' :'#616161'
+              borderColor:errors.houseNumber ? 'red' :'#616161'
             }}
               className="InputStyle"
               type="text"
@@ -325,7 +337,7 @@ render() {
                 }
               }
               onBlur={handleBlur}
-              value={values.lastName}
+              value={values.houseNumber}
             />
           </div>
           <div style={{display:'flex',
@@ -334,7 +346,7 @@ render() {
           <label style={{marginTop:24 }} >Postatl code</label>
             <input
             style={{
-              borderColor:errors.lastName ? 'red' :'#616161'
+              borderColor:errors.postalCode ? 'red' :'#616161'
             }}
               className="InputStyle"
               type="text"
@@ -346,13 +358,13 @@ render() {
                 }
               }
               onBlur={handleBlur}
-              value={values.lastName}
+              value={values.postalCode}
             />
           </div> 
         </div>
             <label style={{marginTop:24}} >Select country</label>
-            <Field as="select" name="country">
-             <option value="Germany">Germany</option>
+            <Field component="select" as="select" name="country">
+             <option defaultValue value="Germany">Germany</option>
              <option value="Austria">Austria</option>
              <option value="Switzerland">Switzerland</option>
            </Field>
