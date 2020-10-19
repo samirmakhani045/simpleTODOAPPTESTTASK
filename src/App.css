@@ -1,0 +1,99 @@
+.Header {
+    background: #272E71;
+    box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.2);
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: var(--z-index-satellite);
+  }
+  
+  .Header__inner {
+    align-items: stretch;
+    color: var(--color-greyscale-xlight);
+    display: flex;
+    height: 5.5rem;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 148rem;
+    padding: 0 2rem;
+  }
+ 
+  .LogoMobile {
+    height: 2em;
+    max-width: 100%;
+    width: 2em;
+  
+    @media (min-width: $tablet-portrait) {
+      display: none;
+    }
+  }
+  
+  .LogoDesktop {
+      display: block;
+      height: auto;
+      margin-left: 1rem;
+      max-height: 4em;
+      max-width: 100%;
+      margin-top: 24px;
+    }
+  
+  .LogoDesktop--noHide {
+    display: block;
+    height: auto;
+    max-width: 20rem;
+  
+  }
+  
+  .LogoDesktop--header {
+    max-width: 14rem;
+  }
+  
+  .button {
+    border: none;
+    width: 50%;
+    color: white;
+    padding: 8px 19px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .customizeForm{
+    display: flex;
+    flex: revert;
+    flex-direction: column;
+    width: 100%;
+    padding: 12px;
+  }
+
+  .InputStyle{
+    border: 3px solid #ccc;
+    color: #616161;
+    outline: 0;
+    padding: 7px;
+    font-size: 1em;
+    border-radius: 5px;  
+    height: 47px;
+    margin: 6px 0px;
+  }
+
+  .sidebarButton{
+    height: 60px;
+    font-size: 18px;
+    background-color: #cccccc;
+    border: 0px;
+    cursor: pointer;
+  }
+  .sidebarButton:hover{
+    background-color: #616161;
+  }
+  @media only screen and (max-width: 600px) {
+    .mobile-continer{
+      width: 90% !important;
+      margin: auto;
+    }
+  }
+
