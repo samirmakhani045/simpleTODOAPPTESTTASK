@@ -48,7 +48,6 @@ class UserSetting extends Component {
         body: this.state.firstName,
         userId: 1,
       }).then((repos) => {
-          const allRepos = repos.data;
           if(repos.status === 200 || repos.status === 201){
             alert("Data is saved in database")
 
